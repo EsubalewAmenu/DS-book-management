@@ -177,7 +177,7 @@ class Ds_Book_Manager
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 		$DS_bm_book_download_api = new DS_bm_book_download_api();
-		$this->loader->add_action('rest_api_init', $DS_bm_book_download_api, 'rest_get_book', 1, 1);
+		$this->loader->add_action('rest_api_init', $DS_bm_book_download_api, 'rest_get_et_book', 1, 1);
 	}
 
 	/**
