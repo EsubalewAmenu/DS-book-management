@@ -124,6 +124,7 @@ class Ds_Book_Manager
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-ds-book-manager-public.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/api/book/download.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/api/book/all_books_or_search.php';
 
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_post_type_books.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_books_taxonomy.php';
@@ -193,6 +194,9 @@ class Ds_Book_Manager
 		$DS_bm_book_download_api = new DS_bm_book_download_api();
 		$this->loader->add_action('rest_api_init', $DS_bm_book_download_api, 'rest_get_et_book', 1, 1);
 		$this->loader->add_action('rest_api_init', $DS_bm_book_download_api, 'rest_get_book', 1, 1);
+		
+		$DS_bm_all_book_or_search_api = new DS_bm_all_book_or_search_api();
+		$this->loader->add_action('rest_api_init', $DS_bm_all_book_or_search_api, 'rest_get_books', 1, 1);
 	}
 
 	/**
