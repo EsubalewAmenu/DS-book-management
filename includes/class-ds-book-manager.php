@@ -197,6 +197,7 @@ class Ds_Book_Manager
 		
 		$DS_bm_all_book_or_search_api = new DS_bm_all_book_or_search_api();
 		$this->loader->add_action('rest_api_init', $DS_bm_all_book_or_search_api, 'rest_get_books', 1, 1);
+		$this->loader->add_action('rest_api_init', $DS_bm_all_book_or_search_api, 'rest_search_books', 1, 1);
 	}
 
 	/**
