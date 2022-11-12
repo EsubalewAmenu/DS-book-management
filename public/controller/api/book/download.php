@@ -59,6 +59,50 @@ class DS_bm_book_download_api
             ));
         });
     }
+    function rest_get_book()
+    {
+        add_action('rest_api_init', function () {
+            register_rest_route(ds_bm . '/v1', '/book/(?P<book_type>[a-zA-Z0-9-]+)/(?P<book_name>[a-zA-Z0-9-]+)', array(
+                'methods' => 'GET',
+                'callback' => function (WP_REST_Request $request) {
+                    //
+                    $book_name = $request->get_param('book_name');
+                    $book_type = $request->get_param('book_type');
+
+                    $args = array(
+                        // 'content'  => '%'.$book_name.'%',
+                        'post_type'  => 'ds_bm_books',
+                        'post_status' => 'publish',
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'ds_bm_book_categories',
+                                'field'    => 'slug',
+                                'terms'    => $book_type
+                            )
+                        )
+                    );
+                    $book = get_posts( $args );
+
+                    if ($book) {
+                        // print_r($book);
+
+                        $common_pre = "https://drive.google.com/u/0/uc?id=";
+                        $common_suf = "&export=download";
+                        wp_redirect($common_pre . $book->en . $common_suf);
+                        exit;
+                    } else
+                        return array(
+                            "success" => false,
+                            "error" => true,
+                            "message" => "book not found"
+                        );
+                },
+                'permission_callback' => function () {
+                    return self::is_user_verified();
+                }
+            ));
+        });
+    }
     public function is_user_verified()
     {
         $auth = apache_request_headers();

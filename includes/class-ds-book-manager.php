@@ -125,6 +125,9 @@ class Ds_Book_Manager
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-ds-book-manager-public.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/api/book/download.php';
 
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_post_type_books.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_books_taxonomy.php';
+
 		$this->loader = new Ds_Book_Manager_Loader();
 	}
 
@@ -159,6 +162,13 @@ class Ds_Book_Manager
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+	
+		$Ds_bm_book_types_Admin = new Ds_bm_book_types_Admin();
+		$this->loader->add_action('init', $Ds_bm_book_types_Admin, 'Ds_bm_book_types_registration_init', 1, 1);
+		
+		$Ds_bm_book_categories_taxonomy_Admin = new Ds_bm_book_categories_taxonomy_Admin();
+		$this->loader->add_action('init', $Ds_bm_book_categories_taxonomy_Admin, 'wpdocs_create_ds_bm_book_categories_taxonomies', 1, 1);
+		
 	}
 
 	/**
