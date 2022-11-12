@@ -127,6 +127,7 @@ class Ds_Book_Manager
 
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_post_type_books.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_books_taxonomy.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/bm_grade_levels_taxonomy.php';
 
 		$this->loader = new Ds_Book_Manager_Loader();
 	}
@@ -168,6 +169,9 @@ class Ds_Book_Manager
 		
 		$Ds_bm_book_categories_taxonomy_Admin = new Ds_bm_book_categories_taxonomy_Admin();
 		$this->loader->add_action('init', $Ds_bm_book_categories_taxonomy_Admin, 'wpdocs_create_ds_bm_book_categories_taxonomies', 1, 1);
+
+		$Ds_bm_grade_levels_taxonomy_Admin = new Ds_bm_grade_levels_taxonomy_Admin();
+		$this->loader->add_action('init', $Ds_bm_grade_levels_taxonomy_Admin, 'wpdocs_create_ds_bm_grade_levels_taxonomies', 1, 1);
 		
 	}
 
@@ -188,6 +192,7 @@ class Ds_Book_Manager
 
 		$DS_bm_book_download_api = new DS_bm_book_download_api();
 		$this->loader->add_action('rest_api_init', $DS_bm_book_download_api, 'rest_get_et_book', 1, 1);
+		$this->loader->add_action('rest_api_init', $DS_bm_book_download_api, 'rest_get_book', 1, 1);
 	}
 
 	/**
