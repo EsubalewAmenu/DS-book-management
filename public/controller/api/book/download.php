@@ -62,7 +62,7 @@ class DS_bm_book_download_api
     function rest_get_book()
     {
         add_action('rest_api_init', function () {
-            register_rest_route(ds_bm . '/v1', '/book/(?P<book_level>[a-zA-Z0-9-]+)/(?P<book_name>[a-zA-Z0-9-_]+)', array(
+            register_rest_route(ds_bm . '/v1', '/book/download/(?P<book_level>[a-zA-Z0-9-]+)/(?P<book_name>[a-zA-Z0-9-_]+)', array(
                 'methods' => 'GET',
                 'callback' => function (WP_REST_Request $request) {
                     //
@@ -123,9 +123,9 @@ class DS_bm_book_download_api
                         "message" => "book not found"
                     );
                 },
-                // 'permission_callback' => function () {
-                //     return self::is_user_verified();
-                // }
+                'permission_callback' => function () {
+                    return self::is_user_verified();
+                }
             ));
         });
     }

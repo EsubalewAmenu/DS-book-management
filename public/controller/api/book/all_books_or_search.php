@@ -96,9 +96,9 @@ class DS_bm_all_book_or_search_api
                         "message" => "end"
                     );
                 },
-                // 'permission_callback' => function () {
-                //     return self::is_user_verified();
-                // }
+                'permission_callback' => function () {
+                    return self::is_user_verified();
+                }
             ));
         });
     }
@@ -177,9 +177,9 @@ class DS_bm_all_book_or_search_api
                         "message" => "end"
                     );
                 },
-                // 'permission_callback' => function () {
-                //     return self::is_user_verified();
-                // }
+                'permission_callback' => function () {
+                    return self::is_user_verified();
+                }
             ));
         });
     }
