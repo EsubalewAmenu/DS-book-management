@@ -54,7 +54,7 @@ class DS_bm_book_download_api
                         );
                 },
                 'permission_callback' => function () {
-                    return self::is_user_verified();
+                    return true;//self::is_user_verified();
                 }
             ));
         });

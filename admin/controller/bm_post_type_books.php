@@ -78,7 +78,7 @@ class Ds_bm_book_types_Admin
             'menu_position'      => 20,
             'menu_icon'   => 'dashicons-book',
             'supports'           => array('title', 'editor', 'author'),
-            // 'taxonomies'         => array('category', 'post_tag'),
+            'taxonomies'         => array('post_tag'),
             'show_in_rest'       => true
         );
 
