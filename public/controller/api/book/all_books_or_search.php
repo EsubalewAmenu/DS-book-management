@@ -146,6 +146,31 @@ class DS_bm_all_book_or_search_api
                     $books = get_posts($options);
                     remove_filter('posts_where', array($this, 'filter_post_where_title'));
 
+
+                    $options = array(
+                        'posts_per_page' => $posts_per_page,
+                        'offset' => $offset,
+                        'suppress_filters' => false, // important!
+                        'post_type'  => 'ds_bm_books',
+                        'post_status' => 'publish',
+                        'tax_query' => array(
+                            'relation' => 'AND',
+                            array(
+                                'taxonomy' => 'ds_bm_grade_levels',
+                                'field'    => 'slug',
+                                'terms'    => $book_level
+                            ),
+                            array(
+                                'taxonomy' => 'ds_bm_book_categories',
+                                'field'    => 'name',
+                                'terms'    => $search_query
+                            )
+                        )
+                    );
+                    $books2 = get_posts($options);
+
+                    $books = array_merge($books, $books2);
+
                     if ($books) {
                         $allBooks = [];
                         foreach ($books as $singleBook) {
