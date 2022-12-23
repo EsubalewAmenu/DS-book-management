@@ -195,7 +195,7 @@ class DS_bm_all_book_or_search_api
                             $category = get_the_terms($singleBook->ID, 'ds_bm_book_categories');
                             if ($category) $category = $category[0]->name;
                         
-                            $en = get_tags(array('type' => 'ds_bm_books'));
+                            $en = get_the_tags($singleBook->ID);
                             if ($en) $en = $en[0]->name;
 
                             $allBooks[] = array("name" => $singleBook->post_title, "category" => $category, "en" => $en, "chapters" => $units);
