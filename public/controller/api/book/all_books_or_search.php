@@ -100,7 +100,10 @@ class DS_bm_all_book_or_search_api
                     );
                 },
                 'permission_callback' => function () {
-                    return self::is_user_verified();
+                    $is_logged_in = is_user_logged_in();
+                    if (!$is_logged_in)
+                        $is_logged_in = self::is_user_verified();
+                    return $is_logged_in;
                 }
             ));
         });
@@ -194,7 +197,7 @@ class DS_bm_all_book_or_search_api
 
                             $category = get_the_terms($singleBook->ID, 'ds_bm_book_categories');
                             if ($category) $category = $category[0]->name;
-                        
+
                             $en = get_the_tags($singleBook->ID);
                             if ($en) $en = $en[0]->name;
 
@@ -209,7 +212,11 @@ class DS_bm_all_book_or_search_api
                     );
                 },
                 'permission_callback' => function () {
-                    return self::is_user_verified();
+
+                    $is_logged_in = is_user_logged_in();
+                    if (!$is_logged_in)
+                        $is_logged_in = self::is_user_verified();
+                    return $is_logged_in;
                 }
             ));
         });
