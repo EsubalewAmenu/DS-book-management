@@ -213,10 +213,11 @@ class DS_bm_all_book_or_search_api
                 },
                 'permission_callback' => function () {
 
-                    $is_logged_in = is_user_logged_in();
-                    if (!$is_logged_in)
-                        $is_logged_in = self::is_user_verified();
-                    return $is_logged_in;
+                    return true;
+                    // $is_logged_in = is_user_logged_in();
+                    // if (!$is_logged_in)
+                    //     $is_logged_in = self::is_user_verified();
+                    // return $is_logged_in;
                 }
             ));
         });
